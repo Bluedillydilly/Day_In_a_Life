@@ -6,7 +6,8 @@
 
 #ifndef tri_h
 #define tri_h
-#include <ncurses.h> // for WINDOW type
+#include <curses.h> // for WINDOW type
+
 // structs 
 //
 typedef struct tile_S{

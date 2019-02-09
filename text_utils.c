@@ -7,11 +7,32 @@
 #include <string.h>
 #include <unistd.h>
 #include <time.h>
-#include <ncurses.h>
+#include <curses.h>
 
 #include "triangle.h"
 
-#define SPELL_DELAY 12500
+#define SPELL_DELAY 12500*3
+
+/*
+ * displays title of game and waits for user input
+ */
+void title_screen(int maxx, int maxy)
+{
+    WINDOW *start = newwin( maxy, maxx,  0 , 0);
+    draw_borders( start );
+    char* title = "This is a test Title for the unnamed game based in ncurses";
+    int x_c = get_center_index( title, start ); 
+    
+    random_spell( title, start, maxy/5, x_c );
+    under_spell( title, start, maxy/5, x_c );
+    
+    char *message = "Press any key to continue. ";
+    normal_spell( message, start, maxy/2, get_center_index( message, start ) );  
+    
+    wgetch( start ); // holds until input
+    usleep( SPELL_DELAY );
+    delwin(start);
+}
 
 /*
  *
@@ -75,6 +96,9 @@ void center_spell( char *word, WINDOW *win, int sy )
     normal_spell( word, win, sy, get_center_index( word, win ) );
 }
 
+/*
+ *
+ */
 void swap( int *a, int *b)
 {
     int temp = *a;
