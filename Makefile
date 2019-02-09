@@ -1,8 +1,11 @@
-CFLAGS = -Wall -std=gnu99 -Wextra -pedantic
-CC = gcc
-NLIB = -lncurses
-	
-triangle: triangle.o
-		$(CC) $(CFLAGS) -o tri triangle.o $(NLIB)
-triangle.o: triangle.c
-		$(CC) $(CFLAGS) -c triangle.c $(NLIB)
+CC=gcc
+FLAGS= -Wextra -Wall -std=gnu99 -ggdb -lncurses
+
+game: game.o text_utils.o
+	$(CC) $(FLAGS) -o game game.o text_utils.o
+
+game.o: game.c triangle.h
+	$(CC) -c $(FLAGS) game.c
+
+text_utils.o: text_utils.c triangle.h
+	$(CC) -c $(FLAGS) text_utils.c

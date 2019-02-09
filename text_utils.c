@@ -3,14 +3,13 @@
  *
  */
 
-
 #include <stdlib.h>
-#include <ncurses.h>
 #include <string.h>
 #include <unistd.h>
 #include <time.h>
+#include <ncurses.h>
 
-#include "triangle.h" 
+#include "triangle.h"
 
 #define SPELL_DELAY 12500
 
@@ -60,6 +59,9 @@ void under_spell( char *word, WINDOW *win, int sy, int sx )
     normal_spell( underline, win, sy, sx );
 }
 
+/*
+ *
+ */
 int get_center_index( char *word, WINDOW *win )
 {
     return ( getmaxx(win) - strlen(word) ) / 2;
@@ -175,25 +177,38 @@ void normal_spell( char *word, WINDOW *win, int sy, int sx )
  */
 void spell_out( char *word, WINDOW *win, int sy, int sx, int mode )
 {
-    if( mode == NORMAL )
-    {
-       normal_spell( word, win, sy, sx ); 
-    }
-    else if( mode == CHAR )
-    {
-        char_spell( word, win, sy, sx );
-    }
-    else if( mode == CENTER )
-    {
-        center_spell( word, win, sy );
-    }
-    else if( mode == UNDERLINE )
-    {
-        under_spell( word, win, sy, sx ); 
-    }
-    else if( mode == RANDOM )
-    {
-        random_spell( word, win, sy, sx );
+    switch(mode){
+        
+        case NORMAL:
+            normal_spell( word, win, sy, sx);
+            break;
+
+        case CHAR:
+            char_spell( word, win, sy, sx );
+            break;
+
+        case CENTER:
+            center_spell( word, win, sy );
+            break;
+
+        case UNDERLINE:
+            under_spell( word, win, sy, sx ); 
+            break;
+
+        case RANDOM:
+            random_spell( word, win, sy, sx );
+            break;
+
+        default:
+            normal_spell( word, win, sy, sx);
     }
 }
 
+/*  Centers the cursor on a provided y level in a provided window.
+ *  @param win the window to center the cursor in.
+ *  @param y the y level for the cursor to be centered on.
+ */
+void center_cursor( WINDOW *win, int y )
+{
+    wmove( win, y, getmaxx( win )/2);
+}

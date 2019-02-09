@@ -6,7 +6,7 @@
 
 #ifndef tri_h
 #define tri_h
-#include <curses.h> // for WINDOW type
+#include <ncurses.h> // for WINDOW type
 // structs 
 //
 typedef struct tile_S{
@@ -50,7 +50,6 @@ typedef enum print_mode_e{
  */
 void title_screen( int max_x, int max_y );
 
-
 /*
     Changes the character. Does not refresh output
 */
@@ -71,11 +70,12 @@ void draw( char input , tile space );
 tile *new_tile( int row , int col , char graphic , int type ); 
 
 
-// FUNCTIONS RELATED TO OUTPUTTING TEXT TO A CURSE WINDOW
+// FUNCTIONS RELATED TO OUTPUTTING TEXT TO A CURSE WINDOW //
+//
+//
+// //
 
-/*
- *
- *  MODES:
+/*  MODES:
  *      0 - normal mode. Prints at line maxy, starting at the maxx character in the win window. Refreshes at the end
  *      1 - character by character mode. Prints normally, by refreshs whenever a character is inserted.
  *      2 - center mode. Prints at line maxy, starting at x value that outputs the text in the center of the window win.
@@ -85,23 +85,50 @@ tile *new_tile( int row , int col , char graphic , int type );
  */ 
 void spell_out( char *word, WINDOW *win, int maxy, int maxx, int mode );
 
+/*  Spells out a starting at maxy,maxx. Spells out word.
+ */
 void normal_spell( char *word, WINDOW *win, int maxy, int maxx );
 
+/*
+ *
+ */
 void char_spell( char *word, WINDOW *win, int maxy, int maxx );
 
+/*
+ *
+ */
 void center_spell( char *word, WINDOW *win, int maxy);
 
+/*
+ *
+ */
 void under_spell( char *word, WINDOW *win, int maxy, int maxx );
 
+/*
+ *
+ */
 void random_spell( char *word, WINDOW *win, int maxy, int maxx );
 
 /*
  *
+ */
+void draw_borders( WINDOW *win );
+
+// END OF SPELLING FUNCTIONS //
+//
+// //
+
+// SPELLING HELPER FUNCTIONS //
+//
+// //
+
+/*
+ * Gets the index to print out so word would look centered if displayed out.
  */ 
 int get_center_index( char *word, WINDOW *win);
 
 /*
- *
+ *  Moves the cursor to the middle of a given y.
  */ 
 void center_cursor( WINDOW *win, int y );
 
