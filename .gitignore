@@ -1,3 +1,7 @@
-# ignore all object files
+# Ignore everything
+*
+# Ignore everything BUT
 !*.c
 !*.o
+!.gitignore
+!Makefile
