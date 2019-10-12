@@ -16,7 +16,7 @@ void random_text(WINDOW* win1, WINDOW* win2)
 {
     WINDOW *current_window = win1;
     char input;
-
+    
     while( input != 'q' )
     {
         input = wgetch(current_window);

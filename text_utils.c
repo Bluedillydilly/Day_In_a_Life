@@ -7,11 +7,11 @@
 #include <string.h>
 #include <unistd.h>
 #include <time.h>
-#include <curses.h>
 
 #include "triangle.h"
 
-#define SPELL_DELAY 12500*3
+#define SPELL_DELAY_SEC 5
+#define SPELL_DELAY SPELL_DELAY_SEC * 100000
 
 /*
  * displays title of game and waits for user input
@@ -30,7 +30,6 @@ void title_screen(int maxx, int maxy)
     normal_spell( message, start, maxy/2, get_center_index( message, start ) );  
     
     wgetch( start ); // holds until input
-    usleep( SPELL_DELAY );
     delwin(start);
 }
 
