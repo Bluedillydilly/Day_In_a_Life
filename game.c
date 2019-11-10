@@ -1,32 +1,12 @@
-/* triangle.c */
+/* game.c */
 #define _XOPEN_SOURCE
 #include <stdlib.h> // idk yet, will probably need
-#include <string.h> // for dealing with and manipulating strings 
 #include <unistd.h> // usleep
 #include <curses.h>
 
-#include "triangle.h"
+#include "text_utils.h"
 
 bool do_colors = 0;
-
-/*
- *
- */
-void random_text(WINDOW* win1, WINDOW* win2)
-{
-    WINDOW *current_window = win1;
-    char input;
-    
-    while( input != 'q' )
-    {
-        input = wgetch(current_window);
-        current_window = input%2 == 1 ? win1 : win2 ;
-        wdelch(current_window);
-        winsch(current_window, input);
-        wmove(current_window, rand()%getmaxy(current_window) , rand()%getmaxx(current_window));
-    }
-
-}
 
 /*
  *
@@ -56,8 +36,8 @@ int main()
     another_one = newwin( 20, maxx, maxy-20, 0);
     draw_borders(win);
     draw_borders(another_one);
-    mvwprintw(win, 1, 1, "WIN");
-    mvwprintw(another_one, 1, 1, "another_one");
+    titleWindow(win, "WIN");
+    titleWindow(another_one, "another_one");
     wrefresh(win);
     wrefresh(another_one);
     

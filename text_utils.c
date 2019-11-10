@@ -2,16 +2,47 @@
  *  Text display helper functions. Functions that display text to an output curse window.
  *
  */
-
+#define _XOPEN_SOURCE
+// INCLUDES
+#include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
 #include <time.h>
+// PERSONAL HEADERS
+#include "text_utils.h"
 
-#include "triangle.h"
+// MACROS
+#define SPELL_DELAY_SEC 1
+#define SPELL_DELAY SPELL_DELAY_SEC * 10000
 
-#define SPELL_DELAY_SEC 5
-#define SPELL_DELAY SPELL_DELAY_SEC * 100000
+/*
+ *
+ */
+void random_text(WINDOW* win1, WINDOW* win2)
+{
+    WINDOW *current_window = win1;
+    char input = wgetch(current_window);
+    
+    while( input != 'q' )
+    {
+        current_window = input%2 == 1 ? win1 : win2 ;
+        wdelch(current_window);
+        winsch(current_window, input);
+        wmove(current_window, rand()%getmaxy(current_window) , rand()%getmaxx(current_window));
+        input = wgetch(current_window);
+    }
+
+}
+
+/*
+ *
+ */
+void titleWindow(WINDOW *win, const char *title)
+{
+    mvwprintw(win, 1, 1, title);
+}
+
+
 
 /*
  * displays title of game and waits for user input
@@ -26,7 +57,7 @@ void title_screen(int maxx, int maxy)
     random_spell( title, start, maxy/5, x_c );
     under_spell( title, start, maxy/5, x_c );
     
-    char *message = "Press any key to continue. ";
+    char *message = "Press any key to continue.";
     normal_spell( message, start, maxy/2, get_center_index( message, start ) );  
     
     wgetch( start ); // holds until input
@@ -77,6 +108,7 @@ void under_spell( char *word, WINDOW *win, int sy, int sx )
     }
     sy+=1;
     normal_spell( underline, win, sy, sx );
+    free(underline);
 }
 
 /*
@@ -201,7 +233,8 @@ void normal_spell( char *word, WINDOW *win, int sy, int sx )
 void spell_out( char *word, WINDOW *win, int sy, int sx, int mode )
 {
     switch(mode){
-        
+        // PRINT MODES 
+        // SEE text_utils.h:print_mode_e
         case NORMAL:
             normal_spell( word, win, sy, sx);
             break;
@@ -224,6 +257,7 @@ void spell_out( char *word, WINDOW *win, int sy, int sx, int mode )
 
         default:
             normal_spell( word, win, sy, sx);
+            break;
     }
 }
 
