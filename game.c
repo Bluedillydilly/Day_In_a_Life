@@ -4,18 +4,20 @@
 #include <unistd.h> // usleep
 #include <curses.h>
 
-#include "text_utils.h"
+#include "display/text_utils.h"
+#include "display/windows.h"
 
 bool do_colors = 0;
 
 /*
  *
  */
-int main()
+int main(int argc, char** argv)
 {
     // initializes curses environment 
     initscr();
     start_color();
+    // for colors
     do_colors = has_colors();
     cbreak();
     noecho();
@@ -23,27 +25,22 @@ int main()
     
     int maxx;
     int maxy;
-    getmaxyx( stdscr, maxy, maxx);
+    getmaxyx( stdscr, maxy, maxx );
     
-    // title screen
-    title_screen( maxx, maxy );
+    // window declaration
+    WINDOW* win;
+    WINDOW* another_one;
 
-    // proceed
-    WINDOW *win;
-    WINDOW *another_one;
-
+    // window initialization
     win = newwin( maxy-20, maxx, 0, 0 );
     another_one = newwin( 20, maxx, maxy-20, 0);
-    draw_borders(win);
-    draw_borders(another_one);
-    titleWindow(win, "WIN");
-    titleWindow(another_one, "another_one");
-    wrefresh(win);
-    wrefresh(another_one);
+
+    borders_easy( win );
+    borders_easy( another_one );
     
-    random_text(win, another_one); 
+    title_screen( win );
 
-
+    random_text_WEIRD( win, another_one ); 
     delwin(win);
     delwin(another_one);
     endwin();
