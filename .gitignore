@@ -1,8 +1,10 @@
 # Ignore everything
 *
 # Ignore everything BUT
-!*.c
-!*.h
+!README.txt
 !.gitignore
 !Makefile
 !display/
+!entities/
+!*.c
+!*.h
