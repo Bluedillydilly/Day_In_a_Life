@@ -40,7 +40,8 @@ int main(int argc, char** argv)
     
     title_screen( win );
 
-    random_text_WEIRD( win, another_one ); 
+    random_text_WEIRD( win, another_one );
+    title_screen(another_one);
     delwin(win);
     delwin(another_one);
     endwin();

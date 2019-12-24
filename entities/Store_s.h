@@ -21,4 +21,6 @@ typedef struct Store_s
 	Owner_s owner; //Who the owner of the store is
 };
 
+
+
 #endif
