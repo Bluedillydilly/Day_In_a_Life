@@ -14,7 +14,7 @@
 typedef struct Location_s
 {
 	char* name; //Location name
-};
+}Location_s;
 
 ///////////////
 // FUNCTIONS //

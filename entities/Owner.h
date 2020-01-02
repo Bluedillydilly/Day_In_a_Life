@@ -17,16 +17,16 @@
 
 typedef struct Owner_s
 {
-	char* name; //Name of the owner
+	const char* name; //Name of the owner
 	Location_s* location; //Where the owner is located
 	Store_s** owned_stores; //Stores the owner possesses
-	int num_stores;
-};
+	int num_stores; //Number of stores owned
+}Owner_s;
 
 typedef enum Owner_e
 {
 	Local, Corporate, Coop,
-};
+}Owner_e;
 
 ///////////////
 // FUNCTIONS //
@@ -36,13 +36,13 @@ typedef enum Owner_e
 char* portfolio();
 
 // creates a new owner struct
-Owner_s createOwner(const char* name, Location_s* loc);
+Owner_s* createNewOwner(const char* name, Location_s* loc);
 
 // Add a new store that the owner now controls
-int addStore(Store_s* new_store);
+int addStore(Owner_s* owner, Store_s* new_store);
 
 // Gets the number of stores the owner controls
-int storeCount();
+int storeCount(Owner_s* owner);
 
 
 #endif

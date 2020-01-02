@@ -8,3 +8,5 @@
 !entities/
 !*.c
 !*.h
+
+# Exceptions

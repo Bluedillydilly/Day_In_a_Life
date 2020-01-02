@@ -15,7 +15,13 @@
 
 typedef struct Player_s
 {
-    Owner_s* owns; //Information about the player
-};
+    Owner_s* owner; //Information about the player
+}Player_s;
+
+///////////////
+// FUNCTIONS //
+///////////////
+
+Player_s* createNewPlayer();
 
 #endif
