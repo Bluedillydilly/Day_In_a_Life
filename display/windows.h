@@ -17,24 +17,30 @@
 /*
  * 
  */
-void borders( WINDOW* win, const char vsc, const char hsc, const char cc );
+void borders(WINDOW* win, const char vsc, const char hsc, const char cc);
 
 /*
  * 
  */
-void borders_easy( WINDOW* win);
+void borders_easy(WINDOW* win);
 
 /*
  *  Clears a window.
  *  Sets every character in the window to a blank.
  */ 
-void clear_win(WINDOW *win);
+void clear_win(WINDOW* win);
 
 /*
  * Clears the center of a window.
  * Sets every character in the window, except the edges to blank.
  */
-void clear_win_c(WINDOW *win);
+void clear_win_c(WINDOW* win);
+
+/*
+ * Clears the top window.
+ * Redraws the border of the bottom window.
+ */
+void clear_redraw(WINDOW* btm, WINDOW* top);
 
 /*
  *   Title screen. Waits for player to press any button.

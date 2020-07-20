@@ -10,6 +10,19 @@
 #include "windows.h"
 #include "text_utils.h"
 
+// MACROS
+// NOT PROPERLY IMPLEMENTED
+// FIND UNICODE VALUES NOT ASCII
+// DEFAULT BORDERS
+/*
+#define URC "\u191"
+#define ULC "\u218"
+#define LLC "\u192"
+#define LRC "\u217"
+#define VSC "\u179"
+#define HSC "\u196"
+*/
+
 
 /*
  *
@@ -62,7 +75,8 @@ void borders_easy(WINDOW* win)
  */
 void clear_win(WINDOW* win)
 {
-    werase(win);
+    wclear(win);
+    wrefresh(win);
 }
 
 /*
@@ -72,4 +86,13 @@ void clear_win_c(WINDOW* win)
 {
     clear_win(win);
     borders_easy(win);
+}
+
+/*
+ * 
+ */
+void clear_redraw(WINDOW* btm, WINDOW* top)
+{
+    clear_win(top);
+    clear_win_c(btm);
 }

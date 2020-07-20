@@ -1,9 +1,10 @@
 # Ignore everything
 *
-# Ignore everything BUT
-!README.txt
+
+# DON'T IGNORE
 !.gitignore
 !Makefile
+!doc/
 !display/
 !entities/
 !*.c

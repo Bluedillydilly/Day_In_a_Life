@@ -21,26 +21,27 @@ int main(int argc, char** argv)
     do_colors = has_colors();
     cbreak();
     noecho();
-    keypad( stdscr , TRUE );
+    keypad(stdscr, TRUE);
     
     int maxx;
     int maxy;
-    getmaxyx( stdscr, maxy, maxx );
+    getmaxyx(stdscr, maxy, maxx);
     
     // window declaration
     WINDOW* win;
     WINDOW* another_one;
 
     // window initialization
-    win = newwin( maxy-20, maxx, 0, 0 );
-    another_one = newwin( 20, maxx, maxy-20, 0);
+    win = newwin(maxy-20, maxx, 0, 0);
+    another_one = newwin(20, maxx, maxy-20, 0);
 
-    borders_easy( win );
-    borders_easy( another_one );
+    borders_easy(win);
+    borders_easy(another_one);
     
-    title_screen( win );
+    title_screen(win);
 
-    random_text_WEIRD( win, another_one );
+    random_text_WEIRD(win, another_one);
+    clear_redraw(another_one, win);
     title_screen(another_one);
     delwin(win);
     delwin(another_one);
