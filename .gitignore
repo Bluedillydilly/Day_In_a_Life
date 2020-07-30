@@ -11,6 +11,6 @@
 !*.h
 !run_game
 !build_game
-!README.txt
+!README*
 
 # Exceptions
