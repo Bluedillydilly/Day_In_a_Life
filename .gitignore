@@ -9,5 +9,7 @@
 !entities/
 !*.c
 !*.h
+!run_game
+!build_game
 
 # Exceptions
