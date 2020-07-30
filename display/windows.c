@@ -14,7 +14,8 @@
 // NOT PROPERLY IMPLEMENTED
 // FIND UNICODE VALUES NOT ASCII
 // DEFAULT BORDERS
-/*
+/* 
+// DEFINES CORNER BRACKETS
 #define URC "\u191"
 #define ULC "\u218"
 #define LLC "\u192"
@@ -35,11 +36,11 @@ void title_window(WINDOW *win, const char *title)
 /*
  * displays title of game and waits for user input
  */
-void title_screen(WINDOW* win )
+void title_screen(WINDOW *win )
 {
     borders_easy( win );
     int maxy = getmaxy(win);
-    char* title = "This is a test Title for the unnamed game based in ncurses";
+    char *title = "This is a test Title for the unnamed game based in ncurses";
     int x_c = get_center_index( title, win ); 
     
     random_spell( title, win, maxy/5, x_c );
@@ -55,7 +56,7 @@ void title_screen(WINDOW* win )
 /*
  *
  */
-void borders(WINDOW* win, const char vsc, const char hsc, const char cc )
+void borders(WINDOW *win, const char vsc, const char hsc, const char cc )
 {
     wborder( win, vsc, vsc, hsc, hsc, cc, cc, cc, cc );
     wrefresh( win );
@@ -65,7 +66,7 @@ void borders(WINDOW* win, const char vsc, const char hsc, const char cc )
 /*
  * 
  */
-void borders_easy(WINDOW* win)
+void borders_easy(WINDOW *win)
 {
     borders( win, '|', '-', '+' );
 }
@@ -73,7 +74,7 @@ void borders_easy(WINDOW* win)
 /*
  *
  */
-void clear_win(WINDOW* win)
+void clear_win(WINDOW *win)
 {
     wclear(win);
     wrefresh(win);
@@ -82,7 +83,7 @@ void clear_win(WINDOW* win)
 /*
  *
  */
-void clear_win_c(WINDOW* win)
+void clear_win_c(WINDOW *win)
 {
     clear_win(win);
     borders_easy(win);
@@ -91,7 +92,7 @@ void clear_win_c(WINDOW* win)
 /*
  * 
  */
-void clear_redraw(WINDOW* btm, WINDOW* top)
+void clear_redraw(WINDOW *btm, WINDOW *top)
 {
     clear_win(top);
     clear_win_c(btm);

@@ -19,14 +19,14 @@
 /*
  *
  */
-void random_text_WEIRD(WINDOW* win1, WINDOW* win2)
+void random_text_WEIRD( WINDOW *win1, WINDOW *win2 )
 {
-   WINDOW* current_window = win1;
+    WINDOW *current_window = win1;
     char input = wgetch(current_window);
     
     while( input != 'q' )
     {
-        current_window = input%2 == 1 ? win1 : win2 ;
+        current_window = input%2 ? win1 : win2 ;
         wdelch(current_window);
         winsch(current_window, input);
         wmove(current_window, rand()%(getmaxy(current_window)-2) + 1 ,
@@ -39,7 +39,7 @@ void random_text_WEIRD(WINDOW* win1, WINDOW* win2)
 /*
  *
  */
-void under_spell( char *word,WINDOW* win, int sy, int sx )
+void under_spell( char *word, WINDOW *win, int sy, int sx )
 {
     char *underline = malloc( sizeof( word ) );
     strcpy( underline, word );
@@ -55,7 +55,7 @@ void under_spell( char *word,WINDOW* win, int sy, int sx )
 /*
  *
  */
-int get_center_index( char *word,WINDOW* win )
+int get_center_index( char *word, WINDOW *win )
 {
     return ( getmaxx(win) - strlen(word) ) / 2;
 }
@@ -63,7 +63,7 @@ int get_center_index( char *word,WINDOW* win )
 /*
  *
  */
-void center_spell( char *word,WINDOW* win, int sy )
+void center_spell( char *word, WINDOW *win, int sy )
 {
     normal_spell( word, win, sy, get_center_index( word, win ) );
 }
@@ -81,7 +81,7 @@ void swap( int *a, int *b)
 /*
  *
  */
-void random_spell( char *word,WINDOW* win, int sy, int sx )
+void random_spell( char *word,WINDOW *win, int sy, int sx )
 {
     if( sx + (int)strlen( word ) >= getmaxx( win ) || sx == 0 )
     {
@@ -119,7 +119,7 @@ void random_spell( char *word,WINDOW* win, int sy, int sx )
 /*
  * Display word character by character to the window.
  */ 
-void char_spell( char *word,WINDOW* win, int sy, int sx )
+void char_spell( char *word, WINDOW *win, int sy, int sx )
 {
     if( sx + (int)strlen( word ) >= getmaxx( win ) || sx == 0 )
     {
@@ -145,7 +145,7 @@ void char_spell( char *word,WINDOW* win, int sy, int sx )
 /*
  * Displays a word to the window.
  */ 
-void normal_spell( char *word,WINDOW* win, int sy, int sx )
+void normal_spell( char *word, WINDOW *win, int sy, int sx )
 {
     if( sx + (int)strlen( word )  >= getmaxx( win ) || sx == 0 )
     {
@@ -171,7 +171,7 @@ void normal_spell( char *word,WINDOW* win, int sy, int sx )
 /*
  *  Spells out a word to a window. See triangle.h for more information.
  */
-void spell_out( char *word,WINDOW* win, int sy, int sx, int mode )
+void spell_out( char *word, WINDOW *win, int sy, int sx, int mode )
 {
     switch(mode){
         // PRINT MODES 
@@ -206,7 +206,7 @@ void spell_out( char *word,WINDOW* win, int sy, int sx, int mode )
  *  @param win the window to center the cursor in.
  *  @param y the y level for the cursor to be centered on.
  */
-void center_cursor(WINDOW* win, int y )
+void center_cursor( WINDOW *win, int y )
 {
     wmove( win, y, getmaxx( win )/2);
 }
