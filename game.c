@@ -7,26 +7,47 @@
 #include "display/text_utils.h"
 #include "display/windows.h"
 
-bool do_colors = 0;
+/**
+ * configures Ncurses - colors, keypad, echo'ing, etc.
+ */
+void init_env(char** argv)
+{
+    // initializes curses environment 
+    initscr();
+
+    // COLOR CHECK
+    if (has_colors() == FALSE) // color not supported
+    {
+        endwin();
+        printf("TERMINAL DOESN'T SUPPORT COLOR\n");
+        exit(-1);
+    }
+    start_color(); // color supported
+    init_pair(1, COLOR_RED, COLOR_BLACK);
+
+    attron(COLOR_PAIR(1));
+
+
+    cbreak();
+    noecho();
+    keypad(stdscr, TRUE);    
+}
+
+
+
+
 
 /*
  *
  */
 int main(int argc, char** argv)
 {
-    // initializes curses environment 
-    initscr();
-    start_color();
-    // for colors
-    do_colors = has_colors();
-    cbreak();
-    noecho();
-    keypad(stdscr, TRUE);
-    
+    init_env(argv);
+
     int maxx;
     int maxy;
     getmaxyx(stdscr, maxy, maxx);
-    
+
     // window declaration
     WINDOW* win;
     WINDOW* another_one;
@@ -37,7 +58,7 @@ int main(int argc, char** argv)
 
     borders_easy(win);
     borders_easy(another_one);
-    
+
     title_screen(win);
 
     random_text_WEIRD(win, another_one);
@@ -46,6 +67,6 @@ int main(int argc, char** argv)
     delwin(win);
     delwin(another_one);
     endwin();
-  
+
     return 0;
 }
