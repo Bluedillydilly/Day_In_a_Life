@@ -4,8 +4,8 @@
 #include <unistd.h> // usleep
 #include <curses.h>
 
-#include "display/text_utils.h"
-#include "display/windows.h"
+#include "game.h"
+
 
 /**
  * configures Ncurses - colors, keypad, echo'ing, etc.
@@ -26,6 +26,7 @@ void init_env(char** argv)
     init_pair(1, COLOR_RED, COLOR_BLACK);
 
     attron(COLOR_PAIR(1));
+    
 
 
     cbreak();

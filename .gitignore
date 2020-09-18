@@ -4,9 +4,9 @@
 # DON'T IGNORE
 !.gitignore
 !Makefile
-!doc/
-!display/
-!entities/
+!doc/*
+!display/*
+!entities/*
 !*.c
 !*.h
 !run_game

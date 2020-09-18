@@ -15,7 +15,6 @@ typedef struct Character_s
 {
 	char* name;
 	char* title; //rank/social standing of the character
-	
 };
 
 #endif
