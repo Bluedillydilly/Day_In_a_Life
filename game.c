@@ -36,6 +36,29 @@ void init_env(char** argv)
 
 
 
+/**
+ * 
+ * Returns:
+ *      0: arguments are valid
+ *      1: invalid arguments
+ */
+int arg_check(int argc, char** argv)
+{
+    return 0;
+}
+
+
+
+/**
+ * 
+ */
+void usage_print()
+{
+    printf("POOP");
+
+    return;
+}
+
 
 
 /*
@@ -43,6 +66,12 @@ void init_env(char** argv)
  */
 int main(int argc, char** argv)
 {
+    if( arg_check(argc, argv) )
+    {
+        usage_print();
+        exit(-1);
+    }
+    arg_check(argc, argv);
     init_env(argv);
 
     int maxx;
