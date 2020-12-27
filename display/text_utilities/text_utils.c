@@ -41,14 +41,11 @@ void random_text_WEIRD( WINDOW *win1, WINDOW *win2 )
  */
 void under_spell( char *word, WINDOW *win, int sy, int sx )
 {
-    char *underline = malloc( sizeof( word ) );
-    strcpy( underline, word );
-    for( unsigned int i = 0; i < strlen(word); i++ )
-    {
-        underline[i] = '-';
-    }
-    sy += 1;
-    normal_spell( underline, win, sy, sx );
+    char *underline = malloc( strlen( word ));
+    memset(underline, '-', strlen( word ) );
+    underline[strlen(word)] = '\0';
+    normal_spell( underline, win, sy+1, sx );
+    // free up spaced reserved by underline
     free( underline );
 }
 
@@ -171,7 +168,7 @@ void normal_spell( char *word, WINDOW *win, int sy, int sx )
 /*
  *  Spells out a word to a window. See triangle.h for more information.
  */
-void spell_out( char *word, WINDOW *win, int sy, int sx, int mode )
+void spell_out( char *word, WINDOW *win, int sy, int sx, print_mode mode )
 {
     switch(mode){
         // PRINT MODES 

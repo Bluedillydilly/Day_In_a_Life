@@ -44,6 +44,7 @@ void title_screen(WINDOW *win )
     int x_c = get_center_index( title, win ); 
     
     random_spell( title, win, maxy/5, x_c );
+
     under_spell( title, win, maxy/5, x_c );
     
     char *message = "Press any key to continue.";
