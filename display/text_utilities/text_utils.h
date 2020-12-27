@@ -94,7 +94,7 @@ tile* new_tile( int row , int col , char graphic , int type );
  *      3 - underline mode. Prints normally, however, for each character in word, there will be a '-' printed below it.
  *      4 - random mode. Prints characters out of order.
  */ 
-void spell_out( char* word, WINDOW* win, int maxy, int maxx, int mode );
+void spell_out( char* word, WINDOW* win, int maxy, int maxx, print_mode mode );
 
 /*  Spells out a starting at maxy,maxx. Spells out word.
  */
