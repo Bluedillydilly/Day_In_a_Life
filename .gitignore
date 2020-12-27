@@ -1,16 +1,3 @@
-# Ignore everything
-*
-
-# DON'T IGNORE
-!.gitignore
-!Makefile
-!doc/*
-!display/*
-!entities/*
-!*.c
-!*.h
-!run_game
-!build_game
-!README*
-
-# Exceptions
+.vscode/
+**.o
+game
