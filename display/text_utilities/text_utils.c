@@ -2,7 +2,7 @@
  *  Text display helper functions. Functions that display text to an output curse window.
  *
  */
-#define _XOPEN_SOURCE
+#define _DEFAULT_SOURCE // silence 'usleep impilict declaration' warning
 // INCLUDES
 #include <ncurses.h>
 #include <unistd.h>
@@ -102,14 +102,17 @@ void random_spell( char *word,WINDOW *win, int sy, int sx )
             swap( &ordering[i], &ordering[index] );
         }
         
+        //init_pair(5, COLOR_CYAN, COLOR_MAGENTA);
+        //wattron(win, COLOR_PAIR(5));
+        //wattron(win, A_UNDERLINE);
         for( unsigned int p = 0; p < strlen( word ); p++ )
         {
             wmove( win, sy, sx + ordering[p] );
-            wdelch( win );
-            winsch( win, word[ ordering[p] ] );
+            waddch( win, word[ ordering[p] ] );
             wrefresh( win );
             usleep( SPELL_DELAY );
         }
+        //wattron(win, COLOR_PAIR(2));
     }
 }
 
@@ -131,8 +134,7 @@ void char_spell( char *word, WINDOW *win, int sy, int sx )
         for( unsigned int p = 0; p < strlen( word ); p++ )
         {
             wmove( win, sy, sx + p );
-            wdelch( win );
-            winsch( win, word[p] );
+            waddch( win, word[p] );
             wrefresh( win );
             usleep( SPELL_DELAY );
         }
@@ -144,6 +146,7 @@ void char_spell( char *word, WINDOW *win, int sy, int sx )
  */ 
 void normal_spell( char *word, WINDOW *win, int sy, int sx )
 {
+    
     if( sx + (int)strlen( word )  >= getmaxx( win ) || sx == 0 )
     {
         fprintf( stderr, "%s\n", "String too long to print within borders at provided position." );
@@ -156,13 +159,16 @@ void normal_spell( char *word, WINDOW *win, int sy, int sx )
     {
         for( unsigned int p = 0; p < strlen( word ); p++ )
         {
+            
             wmove( win, sy, sx + p );
             wdelch( win );
             winsch( win, word[p] );
+
         }
         wrefresh( win );
         usleep( SPELL_DELAY );
     }
+
 }
 
 /*
