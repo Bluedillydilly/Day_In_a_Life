@@ -1,8 +1,8 @@
 /* game.c */
-#define _XOPEN_SOURCE
+#define _DEFAULT_SOURCE // silence 'usleep impilict declaration' warning
 #include <stdlib.h> // idk yet, will probably need
 #include <unistd.h> // usleep
-#include <curses.h>
+#include <ncurses.h>
 
 #include "game.h"
 
@@ -23,11 +23,19 @@ void init_env(char** argv)
         exit(-1);
     }
     start_color(); // color supported
-    init_pair(1, COLOR_RED, COLOR_BLACK);
+    init_pair(1, COLOR_BLACK, COLOR_WHITE);
+    init_pair(2, COLOR_WHITE, COLOR_BLACK);
 
     attron(COLOR_PAIR(1));
-    
+    attron(A_UNDERLINE);
+    printw("This is a test!");
+    refresh();
 
+    attron(COLOR_PAIR(2));
+    printw("This is a test!");
+    refresh();
+
+    getch();
 
     cbreak();
     noecho();
@@ -44,6 +52,12 @@ void init_env(char** argv)
  */
 int arg_check(int argc, char** argv)
 {
+    printf("Args (%d):\n", argc);
+    for (int i = 1; i < argc; i++) { // skip './game' arg
+        printf("\t%d: '%s'\n", i, argv[i]);
+        // check for color mode
+        // check for save file
+    }
     return 0;
 }
 
@@ -54,7 +68,8 @@ int arg_check(int argc, char** argv)
  */
 void usage_print()
 {
-    printf("POOP");
+    char* usage_string = "Usage: sPOOP";
+    fprintf(stdout, "%s\n", usage_string);
 
     return;
 }
@@ -71,7 +86,7 @@ int main(int argc, char** argv)
         usage_print();
         exit(-1);
     }
-    arg_check(argc, argv);
+    // arg_check(argc, argv);
     init_env(argv);
 
     int maxx;
