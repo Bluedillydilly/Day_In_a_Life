@@ -39,6 +39,7 @@ void title_window(WINDOW *win, const char *title)
 void title_screen(WINDOW *win )
 {
     borders_easy( win );
+
     int maxy = getmaxy(win);
     char *title = "This is a test Title for the unnamed game based in ncurses";
     int x_c = get_center_index( title, win ); 
@@ -49,6 +50,7 @@ void title_screen(WINDOW *win )
     
     char *message = "Press any key to continue.";
     normal_spell( message, win, maxy/2, get_center_index( message, win ) );  
+
     
     wgetch( win ); // holds until input
     clear_win_c( win );
