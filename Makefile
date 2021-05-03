@@ -1,5 +1,5 @@
 CC=gcc
-FLAGS=-Wextra -Wall -std=gnu99 -ggdb
+FLAGS=-Wextra -Wall -std=gnu99 -ggdb -lm
 LIBS=-lncurses
 WINDOWS=display
 TEXT_UTILS=display/text_utilities
